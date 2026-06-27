@@ -2,16 +2,18 @@
 
 Welcome to the Vibe LeadGen Agents project! This is my Full-Stack Capstone Project for the Kaggle 5-Day AI Agents Intensive Course with Google. I built a system to show how the Google Antigravity SDK, Model Context Protocol (MCP), and Multi-Agent Systems can solve a real-world business problem.
 
+![Vibe LeadGen Dashboard](screenshot.png)
+
 ## The Problem
 
-Local B2B service providers—like commercial cleaners, IT support teams, or catering companies—often struggle to find and connect with new local businesses. When they try to reach out, generic cold emails usually land straight in the spam folder. On the flip side, manually researching local leads and writing personalized emails one by one takes way too much time. It is a major bottleneck for growth.
+Local B2B service providers like commercial cleaners, IT support teams, or catering companies often struggle to find and connect with new local businesses. When they try to reach out, generic cold emails usually land straight in the spam folder. On the flip side, manually researching local leads and writing personalized emails one by one takes way too much time. It is a major bottleneck for growth.
 
 ## The Solution
 
 I built a multi-agent system to handle the heavy lifting. Instead of manually scraping directories and writing emails, this app does it for you. 
 
 Here is what the system does:
-1. It uses a custom DuckDuckGo MCP Server to find independent local businesses that match your specific target audience.
+1. It uses a custom DuckDuckGo MCP Server to find independent local businesses that match my specific target audience.
 2. It researches those businesses autonomously to understand what they do.
 3. It drafts personalized, relevant outreach emails based on that research.
 4. It presents everything in a bright, Playful Geometric React UI so a human can review and approve the drafts before anything actually gets sent. 
