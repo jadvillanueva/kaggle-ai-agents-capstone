@@ -1,0 +1,15 @@
+# Kaggle Capstone Writeup
+
+## The Problem
+Local service businesses rely on finding new commercial clients to grow. For example, a local commercial cleaning company needs to constantly find new offices or clinics that require their services. The traditional approach is highly inefficient. Business owners either buy lists of generic contacts and send spam emails that get ignored, or they spend hours manually searching the web, finding local businesses, and writing individual emails. This manual process takes time away from actually running the business.
+
+## The Solution
+I built the Vibe LeadGen app to automate the heavy lifting of this outreach process. The user simply enters their business name, what they offer, their target audience, and their city. From there, the application takes over. It searches the internet for local businesses that match the criteria. It then researches each business to understand what they do. Finally, it drafts a highly personalized email for each lead based on that research. The user can review all the drafts in a clean interface and approve them before sending. This turns hours of manual work into a simple review process.
+
+## The Architecture
+The application runs on a FastAPI Python backend and a React frontend. The backend uses the Google Antigravity SDK to manage the core logic. When a request comes in from the frontend, the backend triggers an agent. This agent connects to a custom DuckDuckGo search tool using the Model Context Protocol. The agent uses this tool to search the live internet for local businesses and gather data from their websites. Once the agent compiles the research and writes the email drafts, the backend structures the output using Pydantic schemas and sends it back to the React frontend. The frontend displays the results in a bright, modern interface where the user can copy the final drafts. I also included a mock email sending endpoint to demonstrate how the final loop would be closed in a production environment.
+
+## The Journey
+Building this project was a great learning experience. I started by getting the Google Antigravity SDK running with a basic prompt. The initial challenge was getting the agent to find specific, independent local businesses instead of returning generic directories like Yelp. I solved this by building a dedicated DuckDuckGo search tool and connecting it via the Model Context Protocol. This gave the agent the ability to browse the live web and pull specific details about each company. 
+
+Once the data pipeline worked, I encountered rate limit issues with the Gemini API on the free tier. I had to pivot and test different models, eventually successfully routing the logic through the Gemini 2.5 Flash Lite model to balance speed and available quota. Finally, I focused on the user experience. I built a responsive React frontend using a geometric design system to make the tool feel approachable and easy to use. The final result is a practical, full stack application that solves a real business problem.
