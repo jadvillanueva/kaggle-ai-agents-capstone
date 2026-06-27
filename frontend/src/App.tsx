@@ -52,6 +52,25 @@ function App() {
     }
   };
 
+  const handleSendEmail = async (draft: DraftEmail) => {
+    try {
+      const response = await fetch('http://localhost:8000/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to_email: 'placeholder@domain.com', // In production, we'd extract the real email
+          subject: draft.draft_subject,
+          body: draft.draft_body
+        })
+      });
+      if (!response.ok) throw new Error('Failed to send email');
+      alert('Mock email sent successfully!');
+    } catch (err) {
+      console.error(err);
+      alert('Error sending mock email.');
+    }
+  };
+
   return (
     <>
       {/* Background Decorative Shapes */}
@@ -138,7 +157,14 @@ function App() {
                   </div>
                   <div className="draft-actions">
                     <button className="btn-secondary" onClick={() => navigator.clipboard.writeText(draft.draft_body)}>Copy Body</button>
-                    <button className="btn-success">Approve & Send</button>
+                    <button 
+                      className="btn-success" 
+                      onClick={() => handleSendEmail(draft)}
+                      disabled
+                      title="Email sending is disabled for safety in demo mode"
+                    >
+                      Approve & Send
+                    </button>
                   </div>
                 </div>
               ))}

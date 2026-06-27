@@ -24,6 +24,11 @@ class GenerateLeadsRequest(BaseModel):
     city: str
     num_leads: int = 3
 
+class SendEmailRequest(BaseModel):
+    to_email: str
+    subject: str
+    body: str
+
 class DraftEmail(BaseModel):
     lead_name: str
     lead_website: str
@@ -48,7 +53,8 @@ config = LocalAgentConfig(
     response_schema=GenerateLeadsResponse,
     capabilities=types.CapabilitiesConfig(
         enable_subagents=True,
-    )
+    ),
+    model="gemini-2.5-flash-lite"
 )
 
 @app.post("/api/generate", response_model=GenerateLeadsResponse)
@@ -76,6 +82,13 @@ async def generate_leads(request: GenerateLeadsRequest):
                 raise HTTPException(status_code=500, detail="Agent failed to produce structured output.")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/send-email")
+async def send_email(request: SendEmailRequest):
+    # Mock functionality for Capstone demo
+    # In a production app, integrate SendGrid, Mailgun, or SMTP here
+    print(f"Mock sending email to {request.to_email} with subject: {request.subject}")
+    return {"status": "success", "message": "Email queued for sending (mock)"}
 
 if __name__ == "__main__":
     import uvicorn
